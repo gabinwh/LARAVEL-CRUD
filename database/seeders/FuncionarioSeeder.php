@@ -15,6 +15,6 @@ class FuncionarioSeeder extends Seeder
      */
     public function run()
     {
-        Funcionario::factory()->count(10)->create();
+        Funcionario::factory()->count(0)->create();
     }
 }

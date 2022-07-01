@@ -10,7 +10,7 @@
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
-                    <table class="min-w-full text-center">
+                    <table width="100%" class="min-w-full text-center">
                         <thead class="border-b bg-gray-800">
                             <tr>
                                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
@@ -29,28 +29,30 @@
                                     Ações
                                 </th>
                             </tr>
-                        </thead class="border-b">
+                        </thead>
                         <tbody>
                             @foreach ($empresas as $empresa)
                                 <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $empresa->nome }}</td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-4 whitespace-nowrap">
+                                            {{ $empresa->nome }}
+                                    </th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-4 whitespace-nowrap">
                                         {{ $empresa->email }}
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                        {{ $empresa->logotipo }}
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    </th>
+                                    <th class="inline-block">
+                                        <img src="/storage/{{ $empresa->logotipo }}" alt="{{$empresa->nome}}" width="42" height="42">
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-wdite px-6 py-4">
                                         {{ $empresa->site }}
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    </th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('empresas.edit', $empresa->id) }} ">Atualizar</a><br>
                                         <form action="{{ route('empresas.destroy',$empresa->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger delete-btn">Deletar</button>
                                         </form>
-                                    </td>
+                                    </th>
                             @endforeach
                         </tbody>
                     </table>

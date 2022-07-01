@@ -19,7 +19,6 @@ class FuncionarioFactory extends Factory
     {
         return [
             'nome' => $this->faker->name(),
-            'sobrenome' => $this->faker->name(),
             'empresa_id'=>Empresa::inRandomOrder()->first()->id,
             'email' => $this->faker->unique()->safeEmail(),
             'telefone' =>$this->faker-> phoneNumber(),

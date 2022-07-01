@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email')->nullable();
-            $table->binary('logotipo')->nullable();
+            $table->string('logotipo')->nullable();
             $table->string('site')->nullable();
             $table->timestamps();
         });

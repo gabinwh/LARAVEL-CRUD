@@ -24,7 +24,7 @@ class EmpresaController extends Controller
     {
         $empresas = Empresa::all();
 
-        return view('empresas.index')->with('empresas',$empresas); 
+        return view('empresas.index')->with('empresas',$empresas);
     }
 
     /**
@@ -45,11 +45,19 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $request->validate([
         'logotipo' => 'dimensions:min_width=100,min_height=100',]);
-        Empresa::create($request->only('nome','email','site','logotipo'));
+        $imgext = $request->logotipo->extension();
+        $nomeimg = $request->input('nome') . strtotime("now") . "." . $imgext;
+        $request->logotipo->move(public_path('storage'),$nomeimg);
+        $data = [
+            'nome'=> $request->input('nome'),
+            'email'=> $request->input('email'),
+            'site'=> $request->input('site'),
+            'logotipo'=>  $nomeimg,
+
+        ];
+        Empresa::create($data);
         return redirect()->route('empresas.index');
 
     }
@@ -74,7 +82,7 @@ class EmpresaController extends Controller
     public function edit($id)
     {
         $empresa = Empresa::findOrFail($id);
-        
+
         return view('empresas.edit',['empresa' =>$empresa]);
     }
 
@@ -88,7 +96,19 @@ class EmpresaController extends Controller
     public function update(Request $request, $id)
     {
         //$path = $request->file('logotipo')->store('avatars');
-        Empresa::findOrFail($id)->update($request->all());
+        $request->validate([
+            'logotipo' => 'dimensions:min_width=100,min_height=100',]);
+            $imgext = $request->logotipo->extension();
+            $nomeimg = $request->input('nome') . strtotime("now") . "." . $imgext;
+            $request->logotipo->move(public_path('storage'),$nomeimg);
+            $data = [
+                'nome'=> $request->input('nome'),
+                'email'=> $request->input('email'),
+                'site'=> $request->input('site'),
+                'logotipo'=>  $nomeimg,
+
+            ];
+        Empresa::findOrFail($id)->update($data);
         return redirect()->route('empresas.index');
     }
 

@@ -20,22 +20,12 @@
                     <x-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required
                         autofocus />
                 </div>
-
-
-                <div class="mt-4">
-                    <x-label for="sobrenome" :value="__('Sobrenome')" />
-
-                    <x-input id="sobrenome" class="block mt-1 w-full" type="text" name="sobrenome" :value="old('sobrenome')"
-                        required autofocus />
-                </div>
-
-
                 <div class="mt-4">
                     <x-label for="empresa" :value="__('Empresa')" />
                     <select name="empresa_id">
                         @foreach ($empresas as $empresa)
                         <option value=" {{ $empresa->id }} ">{{ $empresa->nome }}</option>
-                        @endforeach                      
+                        @endforeach
 
                     </select>
                 </div>
